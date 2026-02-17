@@ -1,0 +1,1492 @@
+2:I[1254,["956","static/chunks/ee560e2c-124da83eeae18b3c.js","598","static/chunks/e58627ac-5c37f2ed24cfa14f.js","957","static/chunks/30a37ab2-9c4a56725a4a1d34.js","972","static/chunks/972-ff896a235b6d9140.js","230","static/chunks/230-08632fa9f1d50bb7.js","273","static/chunks/273-0d0fc28113feee54.js","931","static/chunks/app/page-c281e338b2051520.js"],"default"]
+3:I[7136,["956","static/chunks/ee560e2c-124da83eeae18b3c.js","598","static/chunks/e58627ac-5c37f2ed24cfa14f.js","957","static/chunks/30a37ab2-9c4a56725a4a1d34.js","972","static/chunks/972-ff896a235b6d9140.js","230","static/chunks/230-08632fa9f1d50bb7.js","273","static/chunks/273-0d0fc28113feee54.js","931","static/chunks/app/page-c281e338b2051520.js"],"default"]
+4:I[5709,["956","static/chunks/ee560e2c-124da83eeae18b3c.js","598","static/chunks/e58627ac-5c37f2ed24cfa14f.js","957","static/chunks/30a37ab2-9c4a56725a4a1d34.js","972","static/chunks/972-ff896a235b6d9140.js","230","static/chunks/230-08632fa9f1d50bb7.js","273","static/chunks/273-0d0fc28113feee54.js","931","static/chunks/app/page-c281e338b2051520.js"],"default"]
+5:I[6932,["956","static/chunks/ee560e2c-124da83eeae18b3c.js","598","static/chunks/e58627ac-5c37f2ed24cfa14f.js","957","static/chunks/30a37ab2-9c4a56725a4a1d34.js","972","static/chunks/972-ff896a235b6d9140.js","230","static/chunks/230-08632fa9f1d50bb7.js","273","static/chunks/273-0d0fc28113feee54.js","931","static/chunks/app/page-c281e338b2051520.js"],"default"]
+10:I[593,["956","static/chunks/ee560e2c-124da83eeae18b3c.js","598","static/chunks/e58627ac-5c37f2ed24cfa14f.js","957","static/chunks/30a37ab2-9c4a56725a4a1d34.js","972","static/chunks/972-ff896a235b6d9140.js","230","static/chunks/230-08632fa9f1d50bb7.js","273","static/chunks/273-0d0fc28113feee54.js","931","static/chunks/app/page-c281e338b2051520.js"],"default"]
+11:I[9207,["956","static/chunks/ee560e2c-124da83eeae18b3c.js","598","static/chunks/e58627ac-5c37f2ed24cfa14f.js","957","static/chunks/30a37ab2-9c4a56725a4a1d34.js","972","static/chunks/972-ff896a235b6d9140.js","230","static/chunks/230-08632fa9f1d50bb7.js","273","static/chunks/273-0d0fc28113feee54.js","931","static/chunks/app/page-c281e338b2051520.js"],"default"]
+12:I[1466,["956","static/chunks/ee560e2c-124da83eeae18b3c.js","598","static/chunks/e58627ac-5c37f2ed24cfa14f.js","957","static/chunks/30a37ab2-9c4a56725a4a1d34.js","972","static/chunks/972-ff896a235b6d9140.js","230","static/chunks/230-08632fa9f1d50bb7.js","273","static/chunks/273-0d0fc28113feee54.js","931","static/chunks/app/page-c281e338b2051520.js"],"default"]
+13:I[5495,["185","static/chunks/app/layout-db660eafd90f8e79.js"],"ThemeProvider"]
+14:I[4707,[],""]
+15:I[6423,[],""]
+6:Tb84,
+# Introduction to Next.js 14
+
+Next.js has revolutionized the way we build React applications. With version 14, it introduces powerful features like the App Router, Server Components, and improved performance optimizations.
+
+## Why Next.js?
+
+Next.js solves many problems that developers face when building React applications:
+
+- **Server-Side Rendering (SSR)**: Improves SEO and initial page load
+- **Static Site Generation (SSG)**: Pre-renders pages at build time
+- **File-based Routing**: No need for complex routing configuration
+- **API Routes**: Build your backend alongside your frontend
+- **Image Optimization**: Automatic image optimization out of the box
+
+## Key Features of Next.js 14
+
+### 1. App Router
+
+The new App Router is built on React Server Components and supports:
+
+```typescript
+// app/page.tsx
+export default function HomePage() {
+  return (
+    <main>
+      <h1>Welcome to Next.js 14!</h1>
+    </main>
+  );
+}
+```
+
+### 2. Server Components
+
+Server Components allow you to render components on the server, reducing JavaScript sent to the client:
+
+```typescript
+// This component runs on the server
+async function ServerComponent() {
+  const data = await fetch('https://api.example.com/data');
+  const json = await data.json();
+  
+  return <div>{json.title}</div>;
+}
+```
+
+### 3. Streaming and Suspense
+
+Next.js 14 supports streaming HTML and using React Suspense for better user experience:
+
+```typescript
+import { Suspense } from 'react';
+
+export default function Page() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <AsyncComponent />
+    </Suspense>
+  );
+}
+```
+
+## Getting Started
+
+### Installation
+
+Create a new Next.js project:
+
+```bash
+npx create-next-app@latest my-app
+cd my-app
+npm run dev
+```
+
+### Project Structure
+
+```
+my-app/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── globals.css
+├── public/
+├── next.config.js
+└── package.json
+```
+
+## Best Practices
+
+1. **Use Server Components by default**: Only use Client Components when you need interactivity
+2. **Optimize Images**: Use the `<Image>` component for automatic optimization
+3. **Implement proper error handling**: Use error boundaries and error.tsx files
+4. **Leverage caching**: Use revalidation strategies for data fetching
+
+## Conclusion
+
+Next.js 14 is a powerful framework that makes building modern web applications easier and faster. With features like Server Components, the App Router, and improved performance, it's an excellent choice for your next project.
+
+Ready to dive deeper? Check out the [official Next.js documentation](https://nextjs.org/docs) for more information.
+
+---
+
+**What's Next?**
+
+- Explore the [App Router documentation](https://nextjs.org/docs/app)
+- Learn about [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
+- Check out [deployment options](https://nextjs.org/docs/app/building-your-application/deploying)
+7:Tdb8,---------------
+
+# Vylt: Protecting Your Personal Data Locally and Securely
+
+We store a huge amount of personal data on our devices—photos, videos, documents, and files that are never meant to be public. Yet, most solutions today push us toward cloud storage or third-party services where control is limited and trust is assumed.
+
+**Vylt** takes a different approach.
+
+It is a local-first encryption tool designed to protect your personal data **directly on your system**, without uploading anything to the cloud. Your files stay with you, encrypted and secure.
+
+---
+
+## What Is Vylt?
+
+Vylt is a lightweight encryption utility that allows you to encrypt folders and files locally. It is especially useful for protecting sensitive data such as:
+
+* Personal photos and videos
+* Important documents
+* Private backups
+
+Unlike cloud-based tools, Vylt performs all encryption and decryption operations **offline**. There is no server, no sync, and no data leakage.
+
+---
+
+## Why Vylt Exists
+
+Vylt started as a learning project—an attempt to understand cryptography beyond theory. Over time, it became clear that many people rely on cloud services without fully understanding where their data goes or who controls it.
+
+Vylt exists to offer an alternative:
+
+* No third-party trust required
+* No internet dependency
+* Full ownership of your data
+
+It is built for people who value privacy and simplicity over convenience-based compromises.
+
+---
+
+## Local-First Encryption Model
+
+Vylt follows a simple but strict philosophy:
+
+> If your data is personal, it should never leave your device.
+
+This means:
+
+* Encryption happens locally
+* Keys never leave your system
+* No background uploads or analytics
+* No remote access of any kind
+
+Your files are transformed into encrypted containers that can only be accessed with your password.
+
+---
+
+## Installing Vylt
+
+Vylt is distributed as a Python package.
+
+Install it using `pip`:
+
+```bash
+pip install vylt
+```
+
+Once installed, the `vylt` command becomes available in your terminal.
+
+---
+
+## Encrypting a Folder
+
+To encrypt a folder:
+
+```bash
+vylt encrypt myfolder
+```
+
+This creates an encrypted `.vylt` archive containing your data.
+
+### Encrypt with Metadata Protection
+
+To hide filenames and folder structure:
+
+```bash
+vylt encrypt myfolder --seal-meta
+```
+
+This ensures that even metadata remains private.
+
+---
+
+## Viewing Encrypted Contents
+
+You can list the contents of an encrypted archive without decrypting it:
+
+```bash
+vylt list myfolder.*.vylt
+```
+
+This is useful for verification without exposing files.
+
+---
+
+## Decrypting Files
+
+To restore your original data:
+
+```bash
+vylt decrypt myfolder.*.vylt
+```
+
+Your files are recovered exactly as they were before encryption.
+
+---
+
+## Who Should Use Vylt?
+
+Vylt is useful for:
+
+* Individuals protecting personal media
+* Students learning about encryption tools
+* Developers interested in privacy-focused software
+* Anyone who prefers offline, local-first security
+
+Vylt aims to make strong encryption accessible without sacrificing usability.
+
+---
+
+## Conclusion
+
+Vylt represents a thoughtful approach to software—one that prioritizes user control, privacy, and clarity over convenience-driven compromises.
+
+It is not just a tool, but an evolving project built with learning and transparency in mind. If Vylt helps even a few people take better control of their personal data, it has already achieved its goal.
+
+---
+
+**Project Repository:** [https://github.com/ankit-chaubey/vylt](https://github.com/ankit-chaubey/vylt)
+8:Tb84,
+# Introduction to Next.js 14
+
+Next.js has revolutionized the way we build React applications. With version 14, it introduces powerful features like the App Router, Server Components, and improved performance optimizations.
+
+## Why Next.js?
+
+Next.js solves many problems that developers face when building React applications:
+
+- **Server-Side Rendering (SSR)**: Improves SEO and initial page load
+- **Static Site Generation (SSG)**: Pre-renders pages at build time
+- **File-based Routing**: No need for complex routing configuration
+- **API Routes**: Build your backend alongside your frontend
+- **Image Optimization**: Automatic image optimization out of the box
+
+## Key Features of Next.js 14
+
+### 1. App Router
+
+The new App Router is built on React Server Components and supports:
+
+```typescript
+// app/page.tsx
+export default function HomePage() {
+  return (
+    <main>
+      <h1>Welcome to Next.js 14!</h1>
+    </main>
+  );
+}
+```
+
+### 2. Server Components
+
+Server Components allow you to render components on the server, reducing JavaScript sent to the client:
+
+```typescript
+// This component runs on the server
+async function ServerComponent() {
+  const data = await fetch('https://api.example.com/data');
+  const json = await data.json();
+  
+  return <div>{json.title}</div>;
+}
+```
+
+### 3. Streaming and Suspense
+
+Next.js 14 supports streaming HTML and using React Suspense for better user experience:
+
+```typescript
+import { Suspense } from 'react';
+
+export default function Page() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <AsyncComponent />
+    </Suspense>
+  );
+}
+```
+
+## Getting Started
+
+### Installation
+
+Create a new Next.js project:
+
+```bash
+npx create-next-app@latest my-app
+cd my-app
+npm run dev
+```
+
+### Project Structure
+
+```
+my-app/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── globals.css
+├── public/
+├── next.config.js
+└── package.json
+```
+
+## Best Practices
+
+1. **Use Server Components by default**: Only use Client Components when you need interactivity
+2. **Optimize Images**: Use the `<Image>` component for automatic optimization
+3. **Implement proper error handling**: Use error boundaries and error.tsx files
+4. **Leverage caching**: Use revalidation strategies for data fetching
+
+## Conclusion
+
+Next.js 14 is a powerful framework that makes building modern web applications easier and faster. With features like Server Components, the App Router, and improved performance, it's an excellent choice for your next project.
+
+Ready to dive deeper? Check out the [official Next.js documentation](https://nextjs.org/docs) for more information.
+
+---
+
+**What's Next?**
+
+- Explore the [App Router documentation](https://nextjs.org/docs/app)
+- Learn about [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
+- Check out [deployment options](https://nextjs.org/docs/app/building-your-application/deploying)
+a:{"twitter":"https://twitter.com/YOUR_TWITTER","github":"https://github.com/ankit-chaubey"}
+9:{"name":"Ankit Chaubey","bio":"Full-stack developer passionate about modern web technologies","avatar":"/images/author.jpg","social":"$a"}
+b:["Next.js","React","TypeScript","Web Dev"]
+c:T1900,
+# Introduction to REST APIs
+
+REST (Representational State Transfer) is an architectural style for building web services. In this guide, we'll build a production-ready REST API using Node.js and Express.
+
+## Why Node.js for APIs?
+
+Node.js is perfect for building APIs because of:
+
+- **Non-blocking I/O**: Handle thousands of concurrent connections
+- **JavaScript everywhere**: Use the same language on frontend and backend
+- **Rich ecosystem**: NPM has packages for almost everything
+- **Fast performance**: V8 engine makes Node.js incredibly fast
+- **Great for microservices**: Lightweight and easy to scale
+
+## Setting Up Your Project
+
+### Installation
+
+First, initialize your project:
+
+```bash
+mkdir my-api
+cd my-api
+npm init -y
+npm install express mongoose dotenv cors helmet
+npm install -D nodemon typescript @types/node @types/express
+```
+
+### Project Structure
+
+```
+my-api/
+├── src/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── utils/
+│   └── server.ts
+├── .env
+├── tsconfig.json
+└── package.json
+```
+
+## Building Your First API
+
+### 1. Basic Express Server
+
+Create a simple Express server:
+
+```typescript
+// src/server.ts
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+
+### 2. Creating a Model
+
+Define your data models using Mongoose:
+
+```typescript
+// src/models/User.ts
+import mongoose, { Schema, Document } from 'mongoose';
+
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  createdAt: Date;
+}
+
+const UserSchema = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
+});
+
+export default mongoose.model<IUser>('User', UserSchema);
+```
+
+### 3. Building Controllers
+
+Create controllers to handle business logic:
+
+```typescript
+// src/controllers/userController.ts
+import { Request, Response } from 'express';
+import User from '../models/User';
+
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    const { name, email, password } = req.body;
+    
+    const user = new User({ name, email, password });
+    await user.save();
+    
+    res.status(201).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+export const getUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await User.find().select('-password');
+    
+    res.status(200).json({
+      success: true,
+      count: users.length,
+      data: users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+```
+
+### 4. Setting Up Routes
+
+Define your API routes:
+
+```typescript
+// src/routes/users.ts
+import express from 'express';
+import { createUser, getUsers } from '../controllers/userController';
+
+const router = express.Router();
+
+router.post('/', createUser);
+router.get('/', getUsers);
+
+export default router;
+```
+
+## Best Practices
+
+### 1. Error Handling
+
+Implement centralized error handling:
+
+```typescript
+// src/middleware/errorHandler.ts
+export const errorHandler = (err, req, res, next) => {
+  console.error(err.stack);
+  
+  res.status(err.statusCode || 500).json({
+    success: false,
+    error: err.message || 'Server Error',
+  });
+};
+```
+
+### 2. Input Validation
+
+Always validate user input:
+
+```typescript
+import { body, validationResult } from 'express-validator';
+
+export const validateUser = [
+  body('email').isEmail().withMessage('Enter a valid email'),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  },
+];
+```
+
+### 3. Rate Limiting
+
+Protect your API from abuse:
+
+```typescript
+import rateLimit from 'express-rate-limit';
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
+
+app.use('/api/', limiter);
+```
+
+### 4. Authentication & Authorization
+
+Implement JWT authentication:
+
+```typescript
+import jwt from 'jsonwebtoken';
+
+export const protect = async (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  
+  if (!token) {
+    return res.status(401).json({ message: 'Not authorized' });
+  }
+  
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: 'Invalid token' });
+  }
+};
+```
+
+## Testing Your API
+
+Use tools like:
+
+- **Postman**: Interactive API testing
+- **Jest**: Unit and integration tests
+- **Supertest**: HTTP assertion library
+
+```typescript
+import request from 'supertest';
+import app from '../server';
+
+describe('GET /api/users', () => {
+  it('should return all users', async () => {
+    const res = await request(app).get('/api/users');
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty('data');
+  });
+});
+```
+
+## Deployment
+
+### Environment Variables
+
+```env
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/mydb
+JWT_SECRET=your-secret-key
+NODE_ENV=production
+```
+
+### Docker
+
+Create a Dockerfile:
+
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+## Conclusion
+
+Building REST APIs with Node.js and Express is straightforward when following best practices. Focus on proper error handling, validation, authentication, and testing to create production-ready APIs.
+
+**Next Steps:**
+- Add database indexing for better performance
+- Implement caching with Redis
+- Set up monitoring with tools like PM2 or New Relic
+- Add API documentation with Swagger
+
+Happy coding! 🚀
+d:T1060,
+# TypeScript Best Practices
+
+TypeScript has become the de facto standard for building large-scale JavaScript applications. Let's explore some best practices that will make your TypeScript code more robust and maintainable.
+
+## 1. Use Strict Mode
+
+Always enable strict mode in your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true
+  }
+}
+```
+
+## 2. Leverage Type Inference
+
+TypeScript is smart about inferring types. Don't over-annotate:
+
+```typescript
+// ❌ Unnecessary type annotation
+const name: string = "Ankit";
+
+// ✅ Let TypeScript infer
+const name = "Ankit";
+```
+
+## 3. Use Interfaces Over Type Aliases (When Possible)
+
+Interfaces are more extensible and provide better error messages:
+
+```typescript
+// ✅ Preferred for objects
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+// ✅ Good for unions and primitives
+type Status = 'active' | 'inactive' | 'pending';
+```
+
+## 4. Avoid `any` Type
+
+The `any` type defeats the purpose of TypeScript. Use `unknown` instead:
+
+```typescript
+// ❌ Avoid
+function process(data: any) {
+  return data.value;
+}
+
+// ✅ Better
+function process(data: unknown) {
+  if (typeof data === 'object' && data !== null && 'value' in data) {
+    return (data as { value: string }).value;
+  }
+}
+```
+
+## 5. Use Utility Types
+
+TypeScript provides powerful utility types:
+
+```typescript
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
+// Partial - all properties optional
+type UserUpdate = Partial<User>;
+
+// Pick - select specific properties
+type UserPublic = Pick<User, 'id' | 'name' | 'email'>;
+
+// Omit - exclude specific properties
+type UserSafe = Omit<User, 'password'>;
+
+// Record - create object type
+type UserRoles = Record<string, 'admin' | 'user' | 'guest'>;
+```
+
+## 6. Use Enums Carefully
+
+Prefer const enums or string literal unions:
+
+```typescript
+// ❌ Regular enum (generates runtime code)
+enum Status {
+  Active,
+  Inactive
+}
+
+// ✅ Const enum (no runtime code)
+const enum Status {
+  Active,
+  Inactive
+}
+
+// ✅ String literal union (my favorite)
+type Status = 'active' | 'inactive';
+```
+
+## 7. Generic Constraints
+
+Use constraints to make generics more specific:
+
+```typescript
+// ✅ Constrained generic
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+
+const user = { name: 'Ankit', age: 25 };
+const name = getProperty(user, 'name'); // Type: string
+```
+
+## 8. Discriminated Unions
+
+Create type-safe state machines:
+
+```typescript
+type LoadingState = {
+  status: 'loading';
+};
+
+type SuccessState<T> = {
+  status: 'success';
+  data: T;
+};
+
+type ErrorState = {
+  status: 'error';
+  error: Error;
+};
+
+type State<T> = LoadingState | SuccessState<T> | ErrorState;
+
+function handleState<T>(state: State<T>) {
+  switch (state.status) {
+    case 'loading':
+      return 'Loading...';
+    case 'success':
+      return state.data; // TypeScript knows data exists
+    case 'error':
+      return state.error.message; // TypeScript knows error exists
+  }
+}
+```
+
+## 9. Readonly Properties
+
+Make properties immutable:
+
+```typescript
+interface Config {
+  readonly apiUrl: string;
+  readonly timeout: number;
+}
+
+// Or use Readonly utility type
+type Config = Readonly<{
+  apiUrl: string;
+  timeout: number;
+}>;
+```
+
+## 10. Organize with Namespaces
+
+Keep related types together:
+
+```typescript
+namespace API {
+  export interface User {
+    id: string;
+    name: string;
+  }
+  
+  export interface Post {
+    id: string;
+    userId: string;
+    title: string;
+  }
+  
+  export type Response<T> = {
+    data: T;
+    error?: string;
+  };
+}
+
+// Usage
+const user: API.User = { id: '1', name: 'Ankit' };
+const response: API.Response<API.User> = { data: user };
+```
+
+## Conclusion
+
+TypeScript is a powerful tool that, when used correctly, can significantly improve code quality and developer experience. Follow these best practices to write more maintainable, type-safe code.
+
+**Key Takeaways:**
+- Enable strict mode
+- Let TypeScript infer types when possible
+- Avoid `any`, use `unknown`
+- Leverage utility types
+- Use discriminated unions for complex state
+e:T1a84,
+# Understanding CSS Grid and Flexbox
+
+CSS Grid and Flexbox are two powerful layout systems that have revolutionized how we build responsive websites. But when should you use each one? Let's dive deep into both!
+
+## The Fundamental Difference
+
+**Flexbox is one-dimensional** - it handles layout in one direction at a time (either row or column).
+
+**Grid is two-dimensional** - it handles both rows and columns simultaneously.
+
+## When to Use Flexbox
+
+Flexbox is perfect for:
+
+- Navigation bars
+- Card layouts
+- Centering elements
+- Distributing space among items
+- Single-row or single-column layouts
+
+### Flexbox Example: Navigation Bar
+
+```css
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #333;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #00f0ff;
+}
+```
+
+```html
+<nav class="nav">
+  <div class="logo">MyBrand</div>
+  <ul class="nav-links">
+    <li><a href="#" class="nav-link">Home</a></li>
+    <li><a href="#" class="nav-link">About</a></li>
+    <li><a href="#" class="nav-link">Contact</a></li>
+  </ul>
+</nav>
+```
+
+### Perfect Centering with Flexbox
+
+```css
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.centered-content {
+  text-align: center;
+  padding: 2rem;
+}
+```
+
+### Responsive Card Layout
+
+```css
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.card {
+  flex: 1 1 300px; /* grow, shrink, basis */
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+```
+
+## When to Use Grid
+
+Grid is ideal for:
+
+- Page layouts
+- Photo galleries
+- Complex two-dimensional layouts
+- Overlapping elements
+- Precise control over rows and columns
+
+### Grid Example: Page Layout
+
+```css
+.page-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  min-height: 100vh;
+  gap: 1rem;
+}
+
+.header {
+  grid-area: header;
+  background: #333;
+  color: white;
+  padding: 1rem;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background: #f5f5f5;
+  padding: 1rem;
+}
+
+.main {
+  grid-area: main;
+  padding: 2rem;
+}
+
+.footer {
+  grid-area: footer;
+  background: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+```
+
+### Responsive Photo Gallery
+
+```css
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.1);
+}
+```
+
+### Complex Dashboard Layout
+
+```css
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(6, 100px);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.widget-large {
+  grid-column: span 8;
+  grid-row: span 4;
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.widget-small {
+  grid-column: span 4;
+  grid-row: span 2;
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+```
+
+## Combining Grid and Flexbox
+
+The real power comes from using both together!
+
+```css
+/* Grid for page layout */
+.page {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 2rem;
+}
+
+/* Flexbox for card content */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-body {
+  flex: 1;
+}
+
+.card-footer {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+```
+
+## Practical Decision Guide
+
+### Use Flexbox when:
+✅ You have a simple one-dimensional layout  
+✅ You need to align items along one axis  
+✅ Content size should determine layout  
+✅ You want items to wrap naturally  
+
+### Use Grid when:
+✅ You need a two-dimensional layout  
+✅ You want precise control over placement  
+✅ You're creating a page template  
+✅ Items need to align in both rows and columns  
+
+## Real-World Example: Blog Post Layout
+
+```css
+/* Grid for overall structure */
+.blog-post {
+  display: grid;
+  grid-template-columns: 1fr min(65ch, 100%) 1fr;
+  gap: 2rem;
+}
+
+.blog-post > * {
+  grid-column: 2;
+}
+
+.blog-post .full-width {
+  grid-column: 1 / -1;
+}
+
+/* Flexbox for post metadata */
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Flexbox for tag list */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  padding: 0.25rem 0.75rem;
+  background: #f0f0f0;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+}
+```
+
+## Responsive Patterns
+
+### Mobile-First Grid
+
+```css
+/* Mobile: single column */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+```
+
+### Flexible Flexbox
+
+```css
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .flex-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .flex-item {
+    flex: 1 1 calc(50% - 0.5rem);
+  }
+}
+```
+
+## Common Pitfalls to Avoid
+
+1. **Don't use Grid for everything** - Flexbox is often simpler for one-dimensional layouts
+2. **Don't forget gap property** - It's cleaner than margins
+3. **Test on different screen sizes** - Responsive design is crucial
+4. **Use semantic HTML** - Layouts should enhance, not replace, proper HTML structure
+
+## Browser Support
+
+Both Grid and Flexbox have excellent browser support:
+- **Flexbox**: 98%+ support (all modern browsers)
+- **Grid**: 96%+ support (all modern browsers)
+
+## Conclusion
+
+CSS Grid and Flexbox aren't competitors - they're complementary tools. Use Grid for two-dimensional layouts and overall page structure. Use Flexbox for one-dimensional layouts and component internals.
+
+**Quick Rule**: Start with Grid for the big picture, use Flexbox for the details.
+
+**Pro Tips:**
+- Use Firefox DevTools Grid Inspector for debugging Grid layouts
+- Use Chrome DevTools Flexbox Inspector for Flexbox debugging
+- Practice with [CSS Grid Garden](https://cssgridgarden.com/) and [Flexbox Froggy](https://flexboxfroggy.com/)
+
+Happy styling! 🎨
+f:T1191,
+# Mastering React Hooks
+
+React Hooks revolutionized how we write React components. Let's explore the most important hooks and advanced patterns.
+
+## useState: Managing State
+
+The most basic hook for component state:
+
+```jsx
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}
+```
+
+### Advanced useState Patterns
+
+**Functional Updates:**
+```jsx
+// Use functional update when new state depends on previous
+setCount(prevCount => prevCount + 1);
+```
+
+**Lazy Initial State:**
+```jsx
+// Expensive computation only runs once
+const [state, setState] = useState(() => {
+  return expensiveComputation();
+});
+```
+
+## useEffect: Side Effects
+
+Handle side effects in your components:
+
+```jsx
+import { useEffect } from 'react';
+
+function DataFetcher({ userId }) {
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    fetch(`/api/user/${userId}`)
+      .then(res => res.json())
+      .then(setData);
+  }, [userId]); // Re-run when userId changes
+  
+  return <div>{data?.name}</div>;
+}
+```
+
+### Cleanup Functions
+
+```jsx
+useEffect(() => {
+  const subscription = subscribeToData();
+  
+  // Cleanup function
+  return () => {
+    subscription.unsubscribe();
+  };
+}, []);
+```
+
+## useContext: Global State
+
+Share state without prop drilling:
+
+```jsx
+import { createContext, useContext } from 'react';
+
+const ThemeContext = createContext('light');
+
+function App() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+
+function Toolbar() {
+  const theme = useContext(ThemeContext);
+  return <div className={theme}>Toolbar</div>;
+}
+```
+
+## useRef: Mutable References
+
+Access DOM elements or store mutable values:
+
+```jsx
+import { useRef } from 'react';
+
+function TextInput() {
+  const inputRef = useRef(null);
+  
+  const focusInput = () => {
+    inputRef.current?.focus();
+  };
+  
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={focusInput}>Focus</button>
+    </>
+  );
+}
+```
+
+## useMemo: Performance Optimization
+
+Memoize expensive computations:
+
+```jsx
+import { useMemo } from 'react';
+
+function ExpensiveComponent({ data }) {
+  const processedData = useMemo(() => {
+    return data.map(item => expensiveProcessing(item));
+  }, [data]);
+  
+  return <List data={processedData} />;
+}
+```
+
+## useCallback: Memoize Functions
+
+Prevent unnecessary re-renders:
+
+```jsx
+import { useCallback } from 'react';
+
+function Parent() {
+  const [count, setCount] = useState(0);
+  
+  // Function reference stays the same
+  const handleClick = useCallback(() => {
+    setCount(c => c + 1);
+  }, []);
+  
+  return <Child onClick={handleClick} />;
+}
+```
+
+## Custom Hooks
+
+Create reusable logic:
+
+```jsx
+function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : initialValue;
+  });
+  
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+  
+  return [value, setValue];
+}
+
+// Usage
+function App() {
+  const [name, setName] = useLocalStorage('name', '');
+  
+  return (
+    <input
+      value={name}
+      onChange={e => setName(e.target.value)}
+    />
+  );
+}
+```
+
+## Advanced Patterns
+
+### useReducer for Complex State
+
+```jsx
+import { useReducer } from 'react';
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+  
+  return (
+    <>
+      <p>{state.count}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+    </>
+  );
+}
+```
+
+## Rules of Hooks
+
+1. **Only call at the top level** - Don't call hooks inside loops, conditions, or nested functions
+2. **Only call from React functions** - Call from components or custom hooks
+
+## Conclusion
+
+React Hooks provide a powerful way to manage state and side effects in your components. Master these patterns to write cleaner, more maintainable React code.
+
+**Next Steps:**
+- Build custom hooks for common patterns
+- Explore the React documentation
+- Practice with real-world projects
+0:["vwPOJy9jo4_bIZw5dq_nF",[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",true],["",{"children":["__PAGE__",{},[["$L1",["$","main",null,{"className":"relative min-h-screen","children":[["$","$L2",null,{}],["$","$L3",null,{}],["$","$L4",null,{}],["$","section",null,{"className":"relative py-20 overflow-hidden","children":[["$","div",null,{"className":"absolute inset-0 grid-background opacity-10"}],["$","div",null,{"className":"relative z-10 max-w-7xl mx-auto px-6","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-4xl md:text-5xl font-bold font-display mb-4","children":["$","span",null,{"className":"gradient-text","children":"Featured Article"}]}],["$","div",null,{"className":"w-24 h-1 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto rounded-full"}]]}],["$","$L5",null,{"post":{"slug":"getting-started-nextjs-14","title":"Getting Started with Next.js 14: The Ultimate Guide","excerpt":"Learn how to build modern web applications with Next.js 14, featuring the new App Router, Server Components, and more.","content":"$6","coverImage":"https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop","date":"2024-02-10","author":{"name":"Ankit Chaubey","bio":"Full-stack developer passionate about modern web technologies","avatar":"/images/author.jpg","social":{"twitter":"https://twitter.com/YOUR_TWITTER","github":"https://github.com/ankit-chaubey"}},"category":"Web Development","tags":["Next.js","React","TypeScript","Web Dev"],"readingTime":"2 min read","featured":true,"series":"$undefined","views":0,"likes":0},"featured":true}]]}]]}],["$","section",null,{"className":"relative py-20","children":[["$","div",null,{"className":"absolute inset-0 bg-gradient-to-b from-transparent via-cyber-dark/50 to-transparent"}],["$","div",null,{"className":"relative z-10 max-w-7xl mx-auto px-6","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-4xl md:text-5xl font-bold font-display mb-4","children":["$","span",null,{"className":"gradient-text","children":"Latest Articles"}]}],["$","p",null,{"className":"text-gray-400 text-xl","children":"Fresh insights, tutorials, and thoughts on technology"}],["$","div",null,{"className":"w-24 h-1 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto rounded-full mt-6"}]]}],["$","div",null,{"className":"grid md:grid-cols-2 lg:grid-cols-3 gap-8","children":[["$","$L5","vylt-protecting-your-personal-data-locally-and-securely",{"post":{"slug":"vylt-protecting-your-personal-data-locally-and-securely","title":"Vylt: Protecting Your Personal Data Locally and Securely","excerpt":"Vylt is a local-first encryption tool that helps you protect personal files and folders without relying on cloud services.","content":"$7","coverImage":"https://unsplash.com/photos/shallow-focus-photography-of-computer-codes-BfrQnKBulYQ","date":"2024-02-11","author":{"name":"Ankit Chaubey","bio":"Developer focused on privacy and security","avatar":"/profile.png"},"category":"Technology","tags":["Privacy","Security","Encryption","Local First","Python"],"readingTime":"3 min read","featured":false,"series":"$undefined","views":0,"likes":0},"index":0}],["$","$L5","getting-started-nextjs-14",{"post":{"slug":"getting-started-nextjs-14","title":"Getting Started with Next.js 14: The Ultimate Guide","excerpt":"Learn how to build modern web applications with Next.js 14, featuring the new App Router, Server Components, and more.","content":"$8","coverImage":"https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop","date":"2024-02-10","author":"$9","category":"Web Development","tags":"$b","readingTime":"2 min read","featured":true,"series":"$undefined","views":0,"likes":0},"index":1}],["$","$L5","building-rest-apis-nodejs",{"post":{"slug":"building-rest-apis-nodejs","title":"Building Scalable REST APIs with Node.js and Express","excerpt":"A comprehensive guide to creating production-ready REST APIs using Node.js, Express, and modern best practices.","content":"$c","coverImage":"https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop","date":"2024-02-08","author":{"name":"Ankit Chaubey","bio":"Full-stack developer passionate about modern web technologies","avatar":"/images/author.jpg","social":{"twitter":"https://twitter.com/YOUR_TWITTER","github":"https://github.com/ankit-chaubey"}},"category":"Backend Development","tags":["Node.js","Express","REST API","Backend"],"readingTime":"5 min read","featured":false,"series":"$undefined","views":0,"likes":0},"index":2}],["$","$L5","typescript-best-practices",{"post":{"slug":"typescript-best-practices","title":"TypeScript Best Practices for Modern Development","excerpt":"Master TypeScript with these essential best practices, tips, and patterns for writing type-safe, maintainable code.","content":"$d","coverImage":"https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&h=600&fit=crop","date":"2024-02-08","author":{"name":"Ankit Chaubey","bio":"Full-stack developer passionate about modern web technologies","avatar":"/images/author.jpg","social":{"github":"https://github.com/ankit-chaubey"}},"category":"Programming","tags":["TypeScript","JavaScript","Best Practices","Type Safety"],"readingTime":"4 min read","featured":false,"series":"$undefined","views":0,"likes":0},"index":3}],["$","$L5","css-grid-vs-flexbox",{"post":{"slug":"css-grid-vs-flexbox","title":"CSS Grid vs Flexbox: When to Use Each Layout System","excerpt":"Master modern CSS layouts by understanding the differences between Grid and Flexbox, and learn when to use each one.","content":"$e","coverImage":"https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=1200&h=600&fit=crop","date":"2024-02-05","author":{"name":"Ankit Chaubey","bio":"Full-stack developer passionate about modern web technologies","avatar":"/images/author.jpg","social":{"twitter":"https://twitter.com/YOUR_TWITTER","github":"https://github.com/ankit-chaubey"}},"category":"CSS & Design","tags":["CSS","Flexbox","Grid","Web Design","Frontend"],"readingTime":"5 min read","featured":true,"series":"$undefined","views":0,"likes":0},"index":4}],["$","$L5","mastering-react-hooks",{"post":{"slug":"mastering-react-hooks","title":"Mastering React Hooks: A Complete Guide","excerpt":"Deep dive into React Hooks - from basics to advanced patterns. Learn how to write cleaner, more efficient React components.","content":"$f","coverImage":"https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=600&fit=crop","date":"2024-02-05","author":{"name":"Ankit Chaubey","bio":"Full-stack developer passionate about modern web technologies","avatar":"/images/author.jpg"},"category":"React","tags":["React","Hooks","JavaScript","Frontend"],"readingTime":"3 min read","featured":false,"series":{"name":"React Deep Dive","order":1},"views":0,"likes":0},"index":5}]]}],false]}]]}],["$","section",null,{"className":"relative py-20","children":["$","div",null,{"className":"max-w-7xl mx-auto px-6","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-4xl md:text-5xl font-bold font-display mb-4","children":["$","span",null,{"className":"gradient-text","children":"Browse by Category"}]}],["$","p",null,{"className":"text-gray-400 text-xl","children":"Explore articles organized by topic"}],["$","div",null,{"className":"w-24 h-1 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto rounded-full mt-6"}]]}],["$","$L10",null,{"categories":[{"name":"Technology","slug":"technology","count":1,"description":"Posts about Technology","color":"#FF006E"},{"name":"Web Development","slug":"web-development","count":1,"description":"Posts about Web Development","color":"#10B981"},{"name":"Backend Development","slug":"backend-development","count":1,"description":"Posts about Backend Development","color":"#B026FF"},{"name":"Programming","slug":"programming","count":1,"description":"Posts about Programming","color":"#10B981"},{"name":"CSS & Design","slug":"css-and-design","count":1,"description":"Posts about CSS & Design","color":"#B026FF"},{"name":"React","slug":"react","count":1,"description":"Posts about React","color":"#10B981"}]}]]}]}],["$","$L11",null,{}],["$","$L12",null,{}],["$","div",null,{"className":"absolute top-1/4 left-0 w-96 h-96 bg-neon-blue/5 rounded-full blur-3xl pointer-events-none"}],["$","div",null,{"className":"absolute bottom-1/4 right-0 w-96 h-96 bg-neon-purple/5 rounded-full blur-3xl pointer-events-none"}]]}],null],null],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/df9f3f9c1e1d3f29.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","suppressHydrationWarning":true,"children":[["$","head",null,{"children":[["$","link",null,{"rel":"icon","href":"/favicon.ico"}],["$","link",null,{"rel":"apple-touch-icon","href":"/apple-touch-icon.png"}],["$","link",null,{"rel":"alternate","type":"application/rss+xml","title":"RSS Feed","href":"/rss.xml"}]]}],["$","body",null,{"className":"antialiased min-h-screen","children":["$","$L13",null,{"attribute":"class","defaultTheme":"dark","enableSystem":true,"children":["$","$L14",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L15",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":"404"}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],"notFoundStyles":[]}]}]}]]}]],null],null],["$L16",null]]]]
+16:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"Ankit Chaubey | Tech Blog & Insights"}],["$","meta","3",{"name":"description","content":"Explore cutting-edge tech articles, tutorials, and insights on web development, AI, and more by Ankit Chaubey."}],["$","link","4",{"rel":"author","href":"https://blog.ankitchaubey.in"}],["$","meta","5",{"name":"author","content":"Ankit Chaubey"}],["$","meta","6",{"name":"keywords","content":"Tech Blog,Web Development,Programming,Ankit Chaubey,JavaScript,TypeScript,React,Next.js,AI/ML,Tutorials"}],["$","meta","7",{"name":"creator","content":"Ankit Chaubey"}],["$","meta","8",{"name":"publisher","content":"Ankit Chaubey"}],["$","meta","9",{"name":"robots","content":"index, follow"}],["$","meta","10",{"name":"googlebot","content":"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"}],["$","meta","11",{"property":"og:title","content":"Ankit Chaubey | Tech Blog & Insights"}],["$","meta","12",{"property":"og:description","content":"Explore cutting-edge tech articles, tutorials, and insights"}],["$","meta","13",{"property":"og:url","content":"https://blog.ankitchaubey.in/"}],["$","meta","14",{"property":"og:site_name","content":"Ankit Chaubey Blog"}],["$","meta","15",{"property":"og:locale","content":"en_US"}],["$","meta","16",{"property":"og:type","content":"website"}],["$","meta","17",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","18",{"name":"twitter:creator","content":"@YOUR_TWITTER"}],["$","meta","19",{"name":"twitter:title","content":"Ankit Chaubey | Tech Blog"}],["$","meta","20",{"name":"twitter:description","content":"Cutting-edge tech articles and tutorials"}]]
+1:null

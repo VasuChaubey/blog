@@ -1,0 +1,349 @@
+2:I[5878,["956","static/chunks/ee560e2c-124da83eeae18b3c.js","598","static/chunks/e58627ac-5c37f2ed24cfa14f.js","972","static/chunks/972-ff896a235b6d9140.js","230","static/chunks/230-08632fa9f1d50bb7.js","273","static/chunks/273-0d0fc28113feee54.js","605","static/chunks/app/post/%5Bslug%5D/page-20e60de25809458f.js"],"Image"]
+3:I[2972,["972","static/chunks/972-ff896a235b6d9140.js","801","static/chunks/app/post/%5Bslug%5D/not-found-ce46e1708b7a4d25.js"],""]
+5:I[6932,["956","static/chunks/ee560e2c-124da83eeae18b3c.js","598","static/chunks/e58627ac-5c37f2ed24cfa14f.js","972","static/chunks/972-ff896a235b6d9140.js","230","static/chunks/230-08632fa9f1d50bb7.js","273","static/chunks/273-0d0fc28113feee54.js","605","static/chunks/app/post/%5Bslug%5D/page-20e60de25809458f.js"],"default"]
+8:I[4707,[],""]
+a:I[6423,[],""]
+b:I[5495,["185","static/chunks/app/layout-db660eafd90f8e79.js"],"ThemeProvider"]
+6:Tb84,
+# Introduction to Next.js 14
+
+Next.js has revolutionized the way we build React applications. With version 14, it introduces powerful features like the App Router, Server Components, and improved performance optimizations.
+
+## Why Next.js?
+
+Next.js solves many problems that developers face when building React applications:
+
+- **Server-Side Rendering (SSR)**: Improves SEO and initial page load
+- **Static Site Generation (SSG)**: Pre-renders pages at build time
+- **File-based Routing**: No need for complex routing configuration
+- **API Routes**: Build your backend alongside your frontend
+- **Image Optimization**: Automatic image optimization out of the box
+
+## Key Features of Next.js 14
+
+### 1. App Router
+
+The new App Router is built on React Server Components and supports:
+
+```typescript
+// app/page.tsx
+export default function HomePage() {
+  return (
+    <main>
+      <h1>Welcome to Next.js 14!</h1>
+    </main>
+  );
+}
+```
+
+### 2. Server Components
+
+Server Components allow you to render components on the server, reducing JavaScript sent to the client:
+
+```typescript
+// This component runs on the server
+async function ServerComponent() {
+  const data = await fetch('https://api.example.com/data');
+  const json = await data.json();
+  
+  return <div>{json.title}</div>;
+}
+```
+
+### 3. Streaming and Suspense
+
+Next.js 14 supports streaming HTML and using React Suspense for better user experience:
+
+```typescript
+import { Suspense } from 'react';
+
+export default function Page() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <AsyncComponent />
+    </Suspense>
+  );
+}
+```
+
+## Getting Started
+
+### Installation
+
+Create a new Next.js project:
+
+```bash
+npx create-next-app@latest my-app
+cd my-app
+npm run dev
+```
+
+### Project Structure
+
+```
+my-app/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── globals.css
+├── public/
+├── next.config.js
+└── package.json
+```
+
+## Best Practices
+
+1. **Use Server Components by default**: Only use Client Components when you need interactivity
+2. **Optimize Images**: Use the `<Image>` component for automatic optimization
+3. **Implement proper error handling**: Use error boundaries and error.tsx files
+4. **Leverage caching**: Use revalidation strategies for data fetching
+
+## Conclusion
+
+Next.js 14 is a powerful framework that makes building modern web applications easier and faster. With features like Server Components, the App Router, and improved performance, it's an excellent choice for your next project.
+
+Ready to dive deeper? Check out the [official Next.js documentation](https://nextjs.org/docs) for more information.
+
+---
+
+**What's Next?**
+
+- Explore the [App Router documentation](https://nextjs.org/docs/app)
+- Learn about [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
+- Check out [deployment options](https://nextjs.org/docs/app/building-your-application/deploying)
+7:T1191,
+# Mastering React Hooks
+
+React Hooks revolutionized how we write React components. Let's explore the most important hooks and advanced patterns.
+
+## useState: Managing State
+
+The most basic hook for component state:
+
+```jsx
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}
+```
+
+### Advanced useState Patterns
+
+**Functional Updates:**
+```jsx
+// Use functional update when new state depends on previous
+setCount(prevCount => prevCount + 1);
+```
+
+**Lazy Initial State:**
+```jsx
+// Expensive computation only runs once
+const [state, setState] = useState(() => {
+  return expensiveComputation();
+});
+```
+
+## useEffect: Side Effects
+
+Handle side effects in your components:
+
+```jsx
+import { useEffect } from 'react';
+
+function DataFetcher({ userId }) {
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    fetch(`/api/user/${userId}`)
+      .then(res => res.json())
+      .then(setData);
+  }, [userId]); // Re-run when userId changes
+  
+  return <div>{data?.name}</div>;
+}
+```
+
+### Cleanup Functions
+
+```jsx
+useEffect(() => {
+  const subscription = subscribeToData();
+  
+  // Cleanup function
+  return () => {
+    subscription.unsubscribe();
+  };
+}, []);
+```
+
+## useContext: Global State
+
+Share state without prop drilling:
+
+```jsx
+import { createContext, useContext } from 'react';
+
+const ThemeContext = createContext('light');
+
+function App() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+
+function Toolbar() {
+  const theme = useContext(ThemeContext);
+  return <div className={theme}>Toolbar</div>;
+}
+```
+
+## useRef: Mutable References
+
+Access DOM elements or store mutable values:
+
+```jsx
+import { useRef } from 'react';
+
+function TextInput() {
+  const inputRef = useRef(null);
+  
+  const focusInput = () => {
+    inputRef.current?.focus();
+  };
+  
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={focusInput}>Focus</button>
+    </>
+  );
+}
+```
+
+## useMemo: Performance Optimization
+
+Memoize expensive computations:
+
+```jsx
+import { useMemo } from 'react';
+
+function ExpensiveComponent({ data }) {
+  const processedData = useMemo(() => {
+    return data.map(item => expensiveProcessing(item));
+  }, [data]);
+  
+  return <List data={processedData} />;
+}
+```
+
+## useCallback: Memoize Functions
+
+Prevent unnecessary re-renders:
+
+```jsx
+import { useCallback } from 'react';
+
+function Parent() {
+  const [count, setCount] = useState(0);
+  
+  // Function reference stays the same
+  const handleClick = useCallback(() => {
+    setCount(c => c + 1);
+  }, []);
+  
+  return <Child onClick={handleClick} />;
+}
+```
+
+## Custom Hooks
+
+Create reusable logic:
+
+```jsx
+function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : initialValue;
+  });
+  
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+  
+  return [value, setValue];
+}
+
+// Usage
+function App() {
+  const [name, setName] = useLocalStorage('name', '');
+  
+  return (
+    <input
+      value={name}
+      onChange={e => setName(e.target.value)}
+    />
+  );
+}
+```
+
+## Advanced Patterns
+
+### useReducer for Complex State
+
+```jsx
+import { useReducer } from 'react';
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+  
+  return (
+    <>
+      <p>{state.count}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+    </>
+  );
+}
+```
+
+## Rules of Hooks
+
+1. **Only call at the top level** - Don't call hooks inside loops, conditions, or nested functions
+2. **Only call from React functions** - Call from components or custom hooks
+
+## Conclusion
+
+React Hooks provide a powerful way to manage state and side effects in your components. Master these patterns to write cleaner, more maintainable React code.
+
+**Next Steps:**
+- Build custom hooks for common patterns
+- Explore the React documentation
+- Practice with real-world projects
+9:["slug","typescript-best-practices","d"]
+0:["vwPOJy9jo4_bIZw5dq_nF",[[["",{"children":["post",{"children":[["slug","typescript-best-practices","d"],{"children":["__PAGE__?{\"slug\":\"typescript-best-practices\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["post",{"children":[["slug","typescript-best-practices","d"],{"children":["__PAGE__",{},[["$L1",["$","article",null,{"className":"min-h-screen bg-cyber-dark","children":[["$","div",null,{"className":"relative h-[60vh] min-h-[500px]","children":[["$","$L2",null,{"src":"https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&h=600&fit=crop","alt":"TypeScript Best Practices for Modern Development","fill":true,"className":"object-cover","priority":true}],["$","div",null,{"className":"absolute inset-0 bg-gradient-to-t from-cyber-dark via-cyber-dark/70 to-transparent"}],["$","div",null,{"className":"absolute inset-0 flex items-end","children":["$","div",null,{"className":"container mx-auto px-6 pb-12","children":[["$","$L3",null,{"href":"/","className":"inline-flex items-center gap-2 text-gray-300 hover:text-neon-blue transition-colors mb-6","children":[["$","svg",null,{"stroke":"currentColor","fill":"none","strokeWidth":"2","viewBox":"0 0 24 24","strokeLinecap":"round","strokeLinejoin":"round","children":["$undefined",[["$","line","0",{"x1":"19","y1":"12","x2":"5","y2":"12","children":[]}],["$","polyline","1",{"points":"12 19 5 12 12 5","children":[]}]]],"className":"$undefined","style":{"color":"$undefined"},"height":"1em","width":"1em","xmlns":"http://www.w3.org/2000/svg"}],["$","span",null,{"children":"Back to Home"}]]}],["$","div",null,{"className":"mb-4","children":["$","span",null,{"className":"category-badge bg-neon-blue/20 text-neon-blue border-neon-blue/50","children":"Programming"}]}],["$","h1",null,{"className":"text-4xl md:text-6xl font-bold font-display text-white mb-6 max-w-4xl","children":"TypeScript Best Practices for Modern Development"}],["$","div",null,{"className":"flex flex-wrap items-center gap-6 text-gray-300","children":[["$","div",null,{"className":"flex items-center gap-3","children":[["$","$L2",null,{"src":"/images/author.jpg","alt":"Ankit Chaubey","width":40,"height":40,"className":"rounded-full"}],["$","span",null,{"className":"font-medium","children":"Ankit Chaubey"}]]}],["$","div",null,{"className":"flex items-center gap-2","children":[["$","svg",null,{"stroke":"currentColor","fill":"none","strokeWidth":"2","viewBox":"0 0 24 24","strokeLinecap":"round","strokeLinejoin":"round","children":["$undefined",[["$","rect","0",{"x":"3","y":"4","width":"18","height":"18","rx":"2","ry":"2","children":[]}],["$","line","1",{"x1":"16","y1":"2","x2":"16","y2":"6","children":[]}],["$","line","2",{"x1":"8","y1":"2","x2":"8","y2":"6","children":[]}],["$","line","3",{"x1":"3","y1":"10","x2":"21","y2":"10","children":[]}]]],"className":"$undefined","style":{"color":"$undefined"},"height":16,"width":16,"xmlns":"http://www.w3.org/2000/svg"}],["$","span",null,{"children":"February 8, 2024"}]]}],["$","div",null,{"className":"flex items-center gap-2","children":[["$","svg",null,{"stroke":"currentColor","fill":"none","strokeWidth":"2","viewBox":"0 0 24 24","strokeLinecap":"round","strokeLinejoin":"round","children":["$undefined",[["$","circle","0",{"cx":"12","cy":"12","r":"10","children":[]}],["$","polyline","1",{"points":"12 6 12 12 16 14","children":[]}]]],"className":"$undefined","style":{"color":"$undefined"},"height":16,"width":16,"xmlns":"http://www.w3.org/2000/svg"}],["$","span",null,{"children":"4 min read"}]]}]]}]]}]}]]}],["$","div",null,{"className":"container mx-auto px-6 py-12","children":["$","div",null,{"className":"max-w-4xl mx-auto","children":[["$","div",null,{"className":"flex flex-wrap gap-2 mb-8","children":[["$","$L3","TypeScript",{"href":"/tag/typescript","className":"tag-badge text-gray-400 hover:text-neon-purple","children":["#","TypeScript"]}],["$","$L3","JavaScript",{"href":"/tag/javascript","className":"tag-badge text-gray-400 hover:text-neon-purple","children":["#","JavaScript"]}],["$","$L3","Best Practices",{"href":"/tag/best practices","className":"tag-badge text-gray-400 hover:text-neon-purple","children":["#","Best Practices"]}],["$","$L3","Type Safety",{"href":"/tag/type safety","className":"tag-badge text-gray-400 hover:text-neon-purple","children":["#","Type Safety"]}]]}],["$","div",null,{"className":"prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-gray-300 prose-a:text-neon-blue prose-strong:text-white prose-code:text-neon-purple prose-pre:bg-cyber-darker","children":"$L4"}],["$","div",null,{"className":"mt-12 pt-8 border-t border-white/10","children":["$","div",null,{"className":"flex items-center justify-between","children":[["$","h3",null,{"className":"text-xl font-bold text-white","children":"Share this post"}],["$","button",null,{"className":"flex items-center gap-2 px-4 py-2 rounded-lg bg-neon-blue/10 text-neon-blue hover:bg-neon-blue/20 transition-colors","children":[["$","svg",null,{"stroke":"currentColor","fill":"none","strokeWidth":"2","viewBox":"0 0 24 24","strokeLinecap":"round","strokeLinejoin":"round","children":["$undefined",[["$","circle","0",{"cx":"18","cy":"5","r":"3","children":[]}],["$","circle","1",{"cx":"6","cy":"12","r":"3","children":[]}],["$","circle","2",{"cx":"18","cy":"19","r":"3","children":[]}],["$","line","3",{"x1":"8.59","y1":"13.51","x2":"15.42","y2":"17.49","children":[]}],["$","line","4",{"x1":"15.41","y1":"6.51","x2":"8.59","y2":"10.49","children":[]}]]],"className":"$undefined","style":{"color":"$undefined"},"height":"1em","width":"1em","xmlns":"http://www.w3.org/2000/svg"}],["$","span",null,{"children":"Share"}]]}]]}]}],["$","div",null,{"className":"mt-12 p-8 rounded-2xl bg-white/5 border border-white/10","children":["$","div",null,{"className":"flex gap-6","children":[["$","$L2",null,{"src":"/images/author.jpg","alt":"Ankit Chaubey","width":80,"height":80,"className":"rounded-full"}],["$","div",null,{"children":[["$","h4",null,{"className":"text-xl font-bold text-white mb-2","children":["About ","Ankit Chaubey"]}],["$","p",null,{"className":"text-gray-400","children":"Full-stack developer passionate about modern web technologies"}]]}]]}]}]]}]}],["$","div",null,{"className":"container mx-auto px-6 py-12","children":[["$","h2",null,{"className":"text-3xl font-bold font-display text-white mb-8","children":"Related Posts"}],["$","div",null,{"className":"grid md:grid-cols-3 gap-8","children":[["$","$L5","getting-started-nextjs-14",{"post":{"slug":"getting-started-nextjs-14","title":"Getting Started with Next.js 14: The Ultimate Guide","excerpt":"Learn how to build modern web applications with Next.js 14, featuring the new App Router, Server Components, and more.","content":"$6","coverImage":"https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop","date":"2024-02-10","author":{"name":"Ankit Chaubey","bio":"Full-stack developer passionate about modern web technologies","avatar":"/images/author.jpg","social":{"twitter":"https://twitter.com/YOUR_TWITTER","github":"https://github.com/ankit-chaubey"}},"category":"Web Development","tags":["Next.js","React","TypeScript","Web Dev"],"readingTime":"2 min read","featured":true,"series":"$undefined","views":0,"likes":0}}],["$","$L5","mastering-react-hooks",{"post":{"slug":"mastering-react-hooks","title":"Mastering React Hooks: A Complete Guide","excerpt":"Deep dive into React Hooks - from basics to advanced patterns. Learn how to write cleaner, more efficient React components.","content":"$7","coverImage":"https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=600&fit=crop","date":"2024-02-05","author":{"name":"Ankit Chaubey","bio":"Full-stack developer passionate about modern web technologies","avatar":"/images/author.jpg"},"category":"React","tags":["React","Hooks","JavaScript","Frontend"],"readingTime":"3 min read","featured":false,"series":{"name":"React Deep Dive","order":1},"views":0,"likes":0}}]]}]]}]]}],null],null],null]},[null,["$","$L8",null,{"parallelRouterKey":"children","segmentPath":["children","post","children","$9","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$La",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","div",null,{"className":"min-h-screen bg-cyber-dark flex items-center justify-center px-6","children":["$","div",null,{"className":"text-center","children":[["$","h1",null,{"className":"text-6xl font-bold font-display text-neon-blue mb-4","children":"404"}],["$","h2",null,{"className":"text-2xl font-bold text-white mb-4","children":"Post Not Found"}],["$","p",null,{"className":"text-gray-400 mb-8","children":"The blog post you're looking for doesn't exist or has been moved."}],["$","$L3",null,{"href":"/","className":"inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-neon-blue text-white hover:bg-neon-blue/90 transition-colors","children":[["$","svg",null,{"stroke":"currentColor","fill":"none","strokeWidth":"2","viewBox":"0 0 24 24","strokeLinecap":"round","strokeLinejoin":"round","children":["$undefined",[["$","path","0",{"d":"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z","children":[]}],["$","polyline","1",{"points":"9 22 9 12 15 12 15 22","children":[]}]]],"className":"$undefined","style":{"color":"$undefined"},"height":"1em","width":"1em","xmlns":"http://www.w3.org/2000/svg"}],["$","span",null,{"children":"Back to Home"}]]}]]}]}],"notFoundStyles":[]}]],[["$","div",null,{"className":"min-h-screen bg-cyber-dark","children":[["$","div",null,{"className":"relative h-[60vh] min-h-[500px] bg-white/5 animate-pulse","children":["$","div",null,{"className":"absolute inset-0 flex items-end","children":["$","div",null,{"className":"container mx-auto px-6 pb-12","children":[["$","div",null,{"className":"h-6 w-32 bg-white/10 rounded mb-6"}],["$","div",null,{"className":"h-6 w-24 bg-white/10 rounded mb-4"}],["$","div",null,{"className":"space-y-3 mb-6","children":[["$","div",null,{"className":"h-12 bg-white/10 rounded w-3/4"}],["$","div",null,{"className":"h-12 bg-white/10 rounded w-1/2"}]]}],["$","div",null,{"className":"flex gap-6","children":[["$","div",null,{"className":"h-5 w-32 bg-white/10 rounded"}],["$","div",null,{"className":"h-5 w-32 bg-white/10 rounded"}],["$","div",null,{"className":"h-5 w-32 bg-white/10 rounded"}]]}]]}]}]}],["$","div",null,{"className":"container mx-auto px-6 py-12","children":["$","div",null,{"className":"max-w-4xl mx-auto","children":[["$","div",null,{"className":"flex gap-2 mb-8","children":[["$","div",null,{"className":"h-6 w-20 bg-white/10 rounded"}],["$","div",null,{"className":"h-6 w-24 bg-white/10 rounded"}],["$","div",null,{"className":"h-6 w-20 bg-white/10 rounded"}]]}],["$","div",null,{"className":"space-y-4","children":[["$","div","0",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"95%"}}],["$","div","1",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"100%"}}],["$","div","2",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"85%"}}],["$","div","3",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"95%"}}],["$","div","4",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"85%"}}],["$","div","5",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"100%"}}],["$","div","6",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"95%"}}],["$","div","7",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"100%"}}],["$","div","8",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"85%"}}],["$","div","9",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"95%"}}],["$","div","10",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"85%"}}],["$","div","11",{"className":"h-4 bg-white/10 rounded animate-pulse","style":{"width":"100%"}}]]}]]}]}]]}],[],[]]]},[null,["$","$L8",null,{"parallelRouterKey":"children","segmentPath":["children","post","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$La",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/df9f3f9c1e1d3f29.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","suppressHydrationWarning":true,"children":[["$","head",null,{"children":[["$","link",null,{"rel":"icon","href":"/favicon.ico"}],["$","link",null,{"rel":"apple-touch-icon","href":"/apple-touch-icon.png"}],["$","link",null,{"rel":"alternate","type":"application/rss+xml","title":"RSS Feed","href":"/rss.xml"}]]}],["$","body",null,{"className":"antialiased min-h-screen","children":["$","$Lb",null,{"attribute":"class","defaultTheme":"dark","enableSystem":true,"children":["$","$L8",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$La",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":"404"}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],"notFoundStyles":[]}]}]}]]}]],null],null],["$Lc",null]]]]
+c:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"TypeScript Best Practices for Modern Development | Your Blog Name | Ankit Chaubey Blog"}],["$","meta","3",{"name":"description","content":"Master TypeScript with these essential best practices, tips, and patterns for writing type-safe, maintainable code."}],["$","link","4",{"rel":"author","href":"https://blog.ankitchaubey.in"}],["$","meta","5",{"name":"author","content":"Ankit Chaubey"}],["$","meta","6",{"name":"keywords","content":"Tech Blog,Web Development,Programming,Ankit Chaubey,JavaScript,TypeScript,React,Next.js,AI/ML,Tutorials"}],["$","meta","7",{"name":"creator","content":"Ankit Chaubey"}],["$","meta","8",{"name":"publisher","content":"Ankit Chaubey"}],["$","meta","9",{"name":"robots","content":"index, follow"}],["$","meta","10",{"name":"googlebot","content":"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"}],["$","meta","11",{"property":"og:title","content":"TypeScript Best Practices for Modern Development"}],["$","meta","12",{"property":"og:description","content":"Master TypeScript with these essential best practices, tips, and patterns for writing type-safe, maintainable code."}],["$","meta","13",{"property":"og:image","content":"https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&h=600&fit=crop"}],["$","meta","14",{"property":"og:type","content":"article"}],["$","meta","15",{"property":"article:published_time","content":"2024-02-08"}],["$","meta","16",{"property":"article:author","content":"Ankit Chaubey"}],["$","meta","17",{"property":"article:tag","content":"TypeScript"}],["$","meta","18",{"property":"article:tag","content":"JavaScript"}],["$","meta","19",{"property":"article:tag","content":"Best Practices"}],["$","meta","20",{"property":"article:tag","content":"Type Safety"}],["$","meta","21",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","22",{"name":"twitter:title","content":"TypeScript Best Practices for Modern Development"}],["$","meta","23",{"name":"twitter:description","content":"Master TypeScript with these essential best practices, tips, and patterns for writing type-safe, maintainable code."}],["$","meta","24",{"name":"twitter:image","content":"https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&h=600&fit=crop"}]]
+1:null
+4:[["$","h1",null,{"id":"typescript-best-practices","children":["$","a",null,{"className":"anchor","href":"#typescript-best-practices","children":"TypeScript Best Practices"}]}],"\n",["$","p",null,{"children":"TypeScript has become the de facto standard for building large-scale JavaScript applications. Let's explore some best practices that will make your TypeScript code more robust and maintainable."}],"\n",["$","h2",null,{"id":"1-use-strict-mode","children":["$","a",null,{"className":"anchor","href":"#1-use-strict-mode","children":"1. Use Strict Mode"}]}],"\n",["$","p",null,{"children":["Always enable strict mode in your ",["$","code",null,{"children":"tsconfig.json"}],":"]}],"\n",["$","figure",null,{"data-rehype-pretty-code-figure":"","children":["$","pre",null,{"style":{"backgroundColor":"#24292e","color":"#e1e4e8"},"tabIndex":"0","data-language":"json","data-theme":"github-dark","children":["$","code",null,{"data-language":"json","data-theme":"github-dark","style":{"display":"grid"},"children":[["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"{"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#79B8FF"},"children":"  \"compilerOptions\""}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":": {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#79B8FF"},"children":"    \"strict\""}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":": "}],["$","span",null,{"style":{"color":"#79B8FF"},"children":"true"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":","}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#79B8FF"},"children":"    \"noImplicitAny\""}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":": "}],["$","span",null,{"style":{"color":"#79B8FF"},"children":"true"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":","}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#79B8FF"},"children":"    \"strictNullChecks\""}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":": "}],["$","span",null,{"style":{"color":"#79B8FF"},"children":"true"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":","}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#79B8FF"},"children":"    \"strictFunctionTypes\""}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":": "}],["$","span",null,{"style":{"color":"#79B8FF"},"children":"true"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"  }"}]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}]]}]}]}],"\n",["$","h2",null,{"id":"2-leverage-type-inference","children":["$","a",null,{"className":"anchor","href":"#2-leverage-type-inference","children":"2. Leverage Type Inference"}]}],"\n",["$","p",null,{"children":"TypeScript is smart about inferring types. Don't over-annotate:"}],"\n",["$","figure",null,{"data-rehype-pretty-code-figure":"","children":["$","pre",null,{"style":{"backgroundColor":"#24292e","color":"#e1e4e8"},"tabIndex":"0","data-language":"typescript","data-theme":"github-dark","children":["$","code",null,{"data-language":"typescript","data-theme":"github-dark","style":{"display":"grid"},"children":[["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// ❌ Unnecessary type annotation"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"const"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" name"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" \"Ankit\""}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// ✅ Let TypeScript infer"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"const"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" name"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" \"Ankit\""}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}]]}]}]}],"\n",["$","h2",null,{"id":"3-use-interfaces-over-type-aliases-when-possible","children":["$","a",null,{"className":"anchor","href":"#3-use-interfaces-over-type-aliases-when-possible","children":"3. Use Interfaces Over Type Aliases (When Possible)"}]}],"\n",["$","p",null,{"children":"Interfaces are more extensible and provide better error messages:"}],"\n",["$","figure",null,{"data-rehype-pretty-code-figure":"","children":["$","pre",null,{"style":{"backgroundColor":"#24292e","color":"#e1e4e8"},"tabIndex":"0","data-language":"typescript","data-theme":"github-dark","children":["$","code",null,{"data-language":"typescript","data-theme":"github-dark","style":{"display":"grid"},"children":[["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// ✅ Preferred for objects"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"interface"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" User"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  id"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  name"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  email"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// ✅ Good for unions and primitives"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Status"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'active'"}],["$","span",null,{"style":{"color":"#F97583"},"children":" |"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'inactive'"}],["$","span",null,{"style":{"color":"#F97583"},"children":" |"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'pending'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}]]}]}]}],"\n",["$","h2",null,{"id":"4-avoid-any-type","children":["$","a",null,{"className":"anchor","href":"#4-avoid-any-type","children":["4. Avoid ",["$","code",null,{"children":"any"}]," Type"]}]}],"\n",["$","p",null,{"children":["The ",["$","code",null,{"children":"any"}]," type defeats the purpose of TypeScript. Use ",["$","code",null,{"children":"unknown"}]," instead:"]}],"\n",["$","figure",null,{"data-rehype-pretty-code-figure":"","children":["$","pre",null,{"style":{"backgroundColor":"#24292e","color":"#e1e4e8"},"tabIndex":"0","data-language":"typescript","data-theme":"github-dark","children":["$","code",null,{"data-language":"typescript","data-theme":"github-dark","style":{"display":"grid"},"children":[["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// ❌ Avoid"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"function"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" process"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"("}],["$","span",null,{"style":{"color":"#FFAB70"},"children":"data"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" any"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":") {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"  return"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" data.value;"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// ✅ Better"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"function"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" process"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"("}],["$","span",null,{"style":{"color":"#FFAB70"},"children":"data"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" unknown"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":") {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"  if"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" ("}],["$","span",null,{"style":{"color":"#F97583"},"children":"typeof"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" data "}],["$","span",null,{"style":{"color":"#F97583"},"children":"==="}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'object'"}],["$","span",null,{"style":{"color":"#F97583"},"children":" &&"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" data "}],["$","span",null,{"style":{"color":"#F97583"},"children":"!=="}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" null"}],["$","span",null,{"style":{"color":"#F97583"},"children":" &&"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'value'"}],["$","span",null,{"style":{"color":"#F97583"},"children":" in"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" data) {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"    return"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" (data "}],["$","span",null,{"style":{"color":"#F97583"},"children":"as"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" { "}],["$","span",null,{"style":{"color":"#FFAB70"},"children":"value"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" }).value;"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"  }"}]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}]]}]}]}],"\n",["$","h2",null,{"id":"5-use-utility-types","children":["$","a",null,{"className":"anchor","href":"#5-use-utility-types","children":"5. Use Utility Types"}]}],"\n",["$","p",null,{"children":"TypeScript provides powerful utility types:"}],"\n",["$","figure",null,{"data-rehype-pretty-code-figure":"","children":["$","pre",null,{"style":{"backgroundColor":"#24292e","color":"#e1e4e8"},"tabIndex":"0","data-language":"typescript","data-theme":"github-dark","children":["$","code",null,{"data-language":"typescript","data-theme":"github-dark","style":{"display":"grid"},"children":[["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"interface"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" User"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  id"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  name"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  email"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  password"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// Partial - all properties optional"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" UserUpdate"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Partial"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"User"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":">;"}]]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// Pick - select specific properties"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" UserPublic"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Pick"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"User"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":", "}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":"'id'"}],["$","span",null,{"style":{"color":"#F97583"},"children":" |"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'name'"}],["$","span",null,{"style":{"color":"#F97583"},"children":" |"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'email'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":">;"}]]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// Omit - exclude specific properties"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" UserSafe"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Omit"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"User"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":", "}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":"'password'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":">;"}]]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// Record - create object type"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" UserRoles"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Record"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":"string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":", "}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":"'admin'"}],["$","span",null,{"style":{"color":"#F97583"},"children":" |"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'user'"}],["$","span",null,{"style":{"color":"#F97583"},"children":" |"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'guest'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":">;"}]]}]]}]}]}],"\n",["$","h2",null,{"id":"6-use-enums-carefully","children":["$","a",null,{"className":"anchor","href":"#6-use-enums-carefully","children":"6. Use Enums Carefully"}]}],"\n",["$","p",null,{"children":"Prefer const enums or string literal unions:"}],"\n",["$","figure",null,{"data-rehype-pretty-code-figure":"","children":["$","pre",null,{"style":{"backgroundColor":"#24292e","color":"#e1e4e8"},"tabIndex":"0","data-language":"typescript","data-theme":"github-dark","children":["$","code",null,{"data-language":"typescript","data-theme":"github-dark","style":{"display":"grid"},"children":[["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// ❌ Regular enum (generates runtime code)"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"enum"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Status"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#79B8FF"},"children":"  Active"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":","}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#79B8FF"},"children":"  Inactive"}]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// ✅ Const enum (no runtime code)"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"const"}],["$","span",null,{"style":{"color":"#F97583"},"children":" enum"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Status"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#79B8FF"},"children":"  Active"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":","}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#79B8FF"},"children":"  Inactive"}]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// ✅ String literal union (my favorite)"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Status"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'active'"}],["$","span",null,{"style":{"color":"#F97583"},"children":" |"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'inactive'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}]]}]}]}],"\n",["$","h2",null,{"id":"7-generic-constraints","children":["$","a",null,{"className":"anchor","href":"#7-generic-constraints","children":"7. Generic Constraints"}]}],"\n",["$","p",null,{"children":"Use constraints to make generics more specific:"}],"\n",["$","figure",null,{"data-rehype-pretty-code-figure":"","children":["$","pre",null,{"style":{"backgroundColor":"#24292e","color":"#e1e4e8"},"tabIndex":"0","data-language":"typescript","data-theme":"github-dark","children":["$","code",null,{"data-language":"typescript","data-theme":"github-dark","style":{"display":"grid"},"children":[["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// ✅ Constrained generic"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"function"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" getProperty"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":", "}],["$","span",null,{"style":{"color":"#B392F0"},"children":"K"}],["$","span",null,{"style":{"color":"#F97583"},"children":" extends"}],["$","span",null,{"style":{"color":"#F97583"},"children":" keyof"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":">("}],["$","span",null,{"style":{"color":"#FFAB70"},"children":"obj"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":", "}],["$","span",null,{"style":{"color":"#FFAB70"},"children":"key"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" K"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":")"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"["}],["$","span",null,{"style":{"color":"#B392F0"},"children":"K"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"] {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"  return"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" obj[key];"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"const"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" user"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" { name: "}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":"'Ankit'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":", age: "}],["$","span",null,{"style":{"color":"#79B8FF"},"children":"25"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" };"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"const"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" name"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#B392F0"},"children":" getProperty"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"(user, "}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":"'name'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"); "}],["$","span",null,{"style":{"color":"#6A737D"},"children":"// Type: string"}]]}]]}]}]}],"\n",["$","h2",null,{"id":"8-discriminated-unions","children":["$","a",null,{"className":"anchor","href":"#8-discriminated-unions","children":"8. Discriminated Unions"}]}],"\n",["$","p",null,{"children":"Create type-safe state machines:"}],"\n",["$","figure",null,{"data-rehype-pretty-code-figure":"","children":["$","pre",null,{"style":{"backgroundColor":"#24292e","color":"#e1e4e8"},"tabIndex":"0","data-language":"typescript","data-theme":"github-dark","children":["$","code",null,{"data-language":"typescript","data-theme":"github-dark","style":{"display":"grid"},"children":[["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" LoadingState"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  status"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'loading'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"};"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" SuccessState"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"> "}],["$","span",null,{"style":{"color":"#F97583"},"children":"="}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  status"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'success'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  data"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"};"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" ErrorState"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  status"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'error'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  error"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Error"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"};"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" State"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"> "}],["$","span",null,{"style":{"color":"#F97583"},"children":"="}],["$","span",null,{"style":{"color":"#B392F0"},"children":" LoadingState"}],["$","span",null,{"style":{"color":"#F97583"},"children":" |"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" SuccessState"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"> "}],["$","span",null,{"style":{"color":"#F97583"},"children":"|"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" ErrorState"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"function"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" handleState"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":">("}],["$","span",null,{"style":{"color":"#FFAB70"},"children":"state"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" State"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":">) {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"  switch"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" (state.status) {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"    case"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'loading'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":":"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"      return"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'Loading...'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"    case"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'success'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":":"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"      return"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" state.data; "}],["$","span",null,{"style":{"color":"#6A737D"},"children":"// TypeScript knows data exists"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"    case"}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":" 'error'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":":"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"      return"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" state.error.message; "}],["$","span",null,{"style":{"color":"#6A737D"},"children":"// TypeScript knows error exists"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"  }"}]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}]]}]}]}],"\n",["$","h2",null,{"id":"9-readonly-properties","children":["$","a",null,{"className":"anchor","href":"#9-readonly-properties","children":"9. Readonly Properties"}]}],"\n",["$","p",null,{"children":"Make properties immutable:"}],"\n",["$","figure",null,{"data-rehype-pretty-code-figure":"","children":["$","pre",null,{"style":{"backgroundColor":"#24292e","color":"#e1e4e8"},"tabIndex":"0","data-language":"typescript","data-theme":"github-dark","children":["$","code",null,{"data-language":"typescript","data-theme":"github-dark","style":{"display":"grid"},"children":[["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"interface"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Config"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"  readonly"}],["$","span",null,{"style":{"color":"#FFAB70"},"children":" apiUrl"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"  readonly"}],["$","span",null,{"style":{"color":"#FFAB70"},"children":" timeout"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" number"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// Or use Readonly utility type"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Config"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Readonly"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<{"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  apiUrl"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"  timeout"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" number"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}>;"}]}]]}]}]}],"\n",["$","h2",null,{"id":"10-organize-with-namespaces","children":["$","a",null,{"className":"anchor","href":"#10-organize-with-namespaces","children":"10. Organize with Namespaces"}]}],"\n",["$","p",null,{"children":"Keep related types together:"}],"\n",["$","figure",null,{"data-rehype-pretty-code-figure":"","children":["$","pre",null,{"style":{"backgroundColor":"#24292e","color":"#e1e4e8"},"tabIndex":"0","data-language":"typescript","data-theme":"github-dark","children":["$","code",null,{"data-language":"typescript","data-theme":"github-dark","style":{"display":"grid"},"children":[["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"namespace"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" API"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"  export"}],["$","span",null,{"style":{"color":"#F97583"},"children":" interface"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" User"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"    id"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"    name"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"  }"}]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"  "}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"  export"}],["$","span",null,{"style":{"color":"#F97583"},"children":" interface"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Post"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"    id"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"    userId"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"    title"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"  }"}]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"  "}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"  export"}],["$","span",null,{"style":{"color":"#F97583"},"children":" type"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" Response"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"> "}],["$","span",null,{"style":{"color":"#F97583"},"children":"="}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" {"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"    data"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" T"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#FFAB70"},"children":"    error"}],["$","span",null,{"style":{"color":"#F97583"},"children":"?:"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" string"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":";"}]]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"  };"}]}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#E1E4E8"},"children":"}"}]}],"\n",["$","span",null,{"data-line":"","children":" "}],"\n",["$","span",null,{"data-line":"","children":["$","span",null,{"style":{"color":"#6A737D"},"children":"// Usage"}]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"const"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" user"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" API"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"."}],["$","span",null,{"style":{"color":"#B392F0"},"children":"User"}],["$","span",null,{"style":{"color":"#F97583"},"children":" ="}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" { id: "}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":"'1'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":", name: "}],["$","span",null,{"style":{"color":"#9ECBFF"},"children":"'Ankit'"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" };"}]]}],"\n",["$","span",null,{"data-line":"","children":[["$","span",null,{"style":{"color":"#F97583"},"children":"const"}],["$","span",null,{"style":{"color":"#79B8FF"},"children":" response"}],["$","span",null,{"style":{"color":"#F97583"},"children":":"}],["$","span",null,{"style":{"color":"#B392F0"},"children":" API"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"."}],["$","span",null,{"style":{"color":"#B392F0"},"children":"Response"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"<"}],["$","span",null,{"style":{"color":"#B392F0"},"children":"API"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"."}],["$","span",null,{"style":{"color":"#B392F0"},"children":"User"}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":"> "}],["$","span",null,{"style":{"color":"#F97583"},"children":"="}],["$","span",null,{"style":{"color":"#E1E4E8"},"children":" { data: user };"}]]}]]}]}]}],"\n",["$","h2",null,{"id":"conclusion","children":["$","a",null,{"className":"anchor","href":"#conclusion","children":"Conclusion"}]}],"\n",["$","p",null,{"children":"TypeScript is a powerful tool that, when used correctly, can significantly improve code quality and developer experience. Follow these best practices to write more maintainable, type-safe code."}],"\n",["$","p",null,{"children":["$","strong",null,{"children":"Key Takeaways:"}]}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":"Enable strict mode"}],"\n",["$","li",null,{"children":"Let TypeScript infer types when possible"}],"\n",["$","li",null,{"children":["Avoid ",["$","code",null,{"children":"any"}],", use ",["$","code",null,{"children":"unknown"}]]}],"\n",["$","li",null,{"children":"Leverage utility types"}],"\n",["$","li",null,{"children":"Use discriminated unions for complex state"}],"\n"]}]]
